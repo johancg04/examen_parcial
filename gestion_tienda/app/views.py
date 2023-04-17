@@ -13,3 +13,7 @@ def gestionUsuarios(request):
 
 def gestionProductos(request):
     return render(request, 'gestion_productos.HTML')
+
+
+def cerrarSesion(request):
+    return render(request, 'login.HTML')
