@@ -23,10 +23,10 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-4 mt-3 mb-3 text-white">
                     <div class="row">
-                        <h5>Bienvenido {{ user.first_name }} {{ user.last_name }}</h5>
+                        <h5>Bienvenido: {{ user.datosusuario.nombre }} {{ user.datosusuario.apellido}}</h5>
                     </div>
                     <div class="row">
-                        <h5>{{ user.datosusuario.profesionUsuario }}</h5>
+                        <h5>Rol: {{ user.datosusuario.rolUsuario }}</h5>
                     </div>
                 </div>
                 <div class="col-1">
@@ -66,17 +66,18 @@
                     <tbody>
                         {% for usuario in usuariosTotales %}
                         <tr>
-                            <td>{{ usuario.first_name }}</td>
-                            <td>{{ usuario.last_name }}</td>
+                            <td>{{ usuario.datosusuario.nombre }}</td>
+                            <td>{{ usuario.datosusuario.apellido }}</td>
+                            <td>{{ usuario.datosusuario.email }}</td>
+                            <td>{{ usuario.datosusuario.user }}</td>
+                            <td>{{ usuario.datosusuario.rolUsuario }}</td>
                             <td>{{ usuario.datosusuario.nroCelular }}</td>
                             <td>{{ usuario.datosusuario.fechaIngreso }}</td>
-                            <td class="text-center"><a class="btn btn-info"
-                                    href="{% url 'app:verUsuario' usuario.id %}"><i class="fa-solid fa-eye"></i></a>
+                            <td class="text-center"><a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a>
                             </td>
                             <td class="text-center"><a class="btn btn-warning" href="#"><i
                                         class="fa-solid fa-edit"></i></a></td>
-                            <td class="text-center"><a class="btn btn-danger"
-                                    href="{% url 'app:eliminarUsuario' usuario.id %}"><i
+                            <td class="text-center"><a class="btn btn-danger" href=""><i
                                         class="fa-solid fa-trash"></i></a></td>
                         </tr>
                         {% endfor %}

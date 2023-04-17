@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -15,7 +16,9 @@ def loginUser(request):
         if usuarioInfo is not None:
             login(request, usuarioInfo)
             if usuarioInfo.datosusuario.rolUsuario == 'ADMINISTRADOR':
-                return HttpResponseRedirect(reverse('app:gestionUsuarios'))
+                return render(request, 'gestion_usuarios.html', {
+                    'usuariosTotales': User.objects.all().order_by('id')
+                })
             else:
                 return HttpResponseRedirect(reverse('app:gestionProductos', kwargs={'ind': usuarioInfo.id}))
         else:
