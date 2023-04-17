@@ -81,18 +81,19 @@
 <body class="text-center">
 
     <main class="form-signin">
-        <form method="post" action="{% url 'app:gestionUsuarios' %}">
+        <form method="post" action="{% url 'app:login' %}">
             {% csrf_token %}
             <img src="https://academias.pamer.pe/wp-content/uploads/2021/07/logo-pucp-v2.png" alt="" width="80"
                 height="80">
             <h1 class="h3 mb-3 fw-normal">Gesti&oacute;n de tienda</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" placeholder="Usuario">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Usuario" name="nombreUsuario">
                 <label for="floatingInput">Ingrese usuario</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    name="contraUsuario">
                 <label for="floatingPassword">Ingrese contraseña</label>
             </div>
 

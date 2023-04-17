@@ -1,10 +1,26 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 # Create your views here.
 
 
-def login(request):
-    return render(request, 'login.HTML')
+def loginUser(request):
+    if request.method == 'POST':
+        nombreUsuario = request.POST.get('nombreUsuario')
+        contraUsuario = request.POST.get('contraUsuario')
+        usuarioInfo = authenticate(
+            request, username=nombreUsuario, password=contraUsuario)
+        if usuarioInfo is not None:
+            login(request, usuarioInfo)
+            if usuarioInfo.datosusuario.rolUsuario == 'ADMINISTRADOR':
+                return HttpResponseRedirect(reverse('app:gestionUsuarios'))
+            else:
+                return HttpResponseRedirect(reverse('app:gestionProductos', kwargs={'ind': usuarioInfo.id}))
+        else:
+            return HttpResponseRedirect(reverse('app:login'))
+    return render(request, 'login.html')
 
 
 def gestionUsuarios(request):
