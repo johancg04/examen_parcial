@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
+from .models import datosUsuario
 
 # Create your views here.
 
@@ -27,7 +28,36 @@ def loginUser(request):
 
 
 def gestionUsuarios(request):
-    return render(request, 'gestion_usuarios.HTML')
+    if request.user.datosusuario.rolUsuario == 'ADMINISTRADOR':
+        if request.method == 'POST':
+            nombreUsuario = request.POST.get('nombreUsuario')
+            apellidoUsuario = request.POST.get('apellidoUsuario')
+            emailUsuario = request.POST.get('emailUsuario')
+            contrasenaUsuario = request.POST.get('passwordUsuario')
+            fechaIngreso = request.POST.get('fechaUsuario')
+            nroCelular = request.POST.get('celUsuario')
+            usernameUsuario = request.POST.get('usernameUsuario')
+
+            usuarioNuevo = User.objects.create(
+                username=usernameUsuario,
+                email=emailUsuario
+            )
+            usuarioNuevo.set_password(contrasenaUsuario)
+            usuarioNuevo.first_name = nombreUsuario
+            usuarioNuevo.last_name = apellidoUsuario
+            usuarioNuevo.is_staff = True
+            usuarioNuevo.save()
+
+            datosUsuario.objects.create(
+                user=usuarioNuevo,
+                fechaIngreso=fechaIngreso,
+                nroCelular=nroCelular
+            )
+            return HttpResponseRedirect(reverse('app:gestionUsuarios'))
+        else:
+            return render(request, 'gestion_usuarios.HTML')
+    else:
+        return render(request, 'gestion_usuarios.HTML')
 
 
 def gestionProductos(request):
@@ -36,3 +66,10 @@ def gestionProductos(request):
 
 def cerrarSesion(request):
     return render(request, 'login.HTML')
+
+
+def eliminarUsuario(request, ind):
+    usuarioEliminar = User.objects.get(id=ind)
+    datosUsuario.objects.get(user=usuarioEliminar).delete()
+    usuarioEliminar.delete()
+    return HttpResponseRedirect(reverse('app:gestionUsuarios'))

@@ -9,4 +9,7 @@ urlpatterns = [
     path('gestionUsuarios', views.gestionUsuarios, name='gestionUsuarios'),
     path('gestionProductos', views.gestionProductos, name='gestionProductos'),
     path('cerrarSesion', views.cerrarSesion, name='cerrarSesion'),
+    path('eliminarUsuario/<str:ind>',
+         views.eliminarUsuario, name='eliminarUsuario')
+
 ]
