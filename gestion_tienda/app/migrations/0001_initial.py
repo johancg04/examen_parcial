@@ -20,12 +20,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True,
                  primary_key=True, serialize=False, verbose_name='ID')),
-                ('rolUsuario', models.CharField(default='USUARIO', max_length=32)),
-                ('nroCelular', models.CharField(default='999888777', max_length=32)),
+                ('rolUsuario', models.CharField(default='VENDEDOR', max_length=32)),
+                ('nroCelular', models.CharField(default='99999999', max_length=32)),
                 ('fechaIngreso', models.DateField(default=datetime.date.today)),
-                ('nombre', models.CharField(default='Nombre', max_length=32)),
-                ('apellido', models.CharField(default='Apellido', max_length=512)),
-                ('email', models.CharField(default='email', max_length=512)),
                 ('user', models.OneToOneField(
                     on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

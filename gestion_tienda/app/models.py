@@ -9,6 +9,3 @@ class datosUsuario(models.Model):
     rolUsuario = models.CharField(max_length=32, default='USUARIO')
     nroCelular = models.CharField(max_length=32, default='987654321')
     fechaIngreso = models.DateField(default=date.today)
-    nombre = models.CharField(max_length=32, default='Nombre')
-    apellido = models.CharField(max_length=32, default='Apellido')
-    email = models.CharField(max_length=32, default='email')

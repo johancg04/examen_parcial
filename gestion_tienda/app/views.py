@@ -37,6 +37,7 @@ def gestionUsuarios(request):
             fechaIngreso = request.POST.get('fechaUsuario')
             nroCelular = request.POST.get('celUsuario')
             usernameUsuario = request.POST.get('usernameUsuario')
+            rolUsuario = request.POST.get('rolUsuario')
 
             usuarioNuevo = User.objects.create(
                 username=usernameUsuario,
@@ -50,8 +51,9 @@ def gestionUsuarios(request):
 
             datosUsuario.objects.create(
                 user=usuarioNuevo,
-                fechaIngreso=fechaIngreso,
-                nroCelular=nroCelular
+                rolUsuario=rolUsuario,
+                nroCelular=nroCelular,
+                fechaIngreso=fechaIngreso
             )
             return HttpResponseRedirect(reverse('app:gestionUsuarios'))
         else:

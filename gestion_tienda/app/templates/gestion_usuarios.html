@@ -23,7 +23,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-4 mt-3 mb-3 text-white">
                     <div class="row">
-                        <h5>Bienvenido: {{ user.datosusuario.nombre }} {{ user.datosusuario.apellido}}</h5>
+                        <h5>Bienvenido: {{ user.first_name }} {{ user.last_name }}</h5>
                     </div>
                     <div class="row">
                         <h5>Rol: {{ user.datosusuario.rolUsuario }}</h5>
@@ -69,10 +69,10 @@
                     <tbody>
                         {% for usuario in usuariosTotales %}
                         <tr>
-                            <td>{{ usuario.datosusuario.nombre }}</td>
-                            <td>{{ usuario.datosusuario.apellido }}</td>
-                            <td>{{ usuario.datosusuario.email }}</td>
-                            <td>{{ usuario.datosusuario.user }}</td>
+                            <td>{{ usuario.first_name }}</td>
+                            <td>{{ usuario.last_name }}</td>
+                            <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.username }}</td>
                             <td>{{ usuario.datosusuario.rolUsuario }}</td>
                             <td>{{ usuario.datosusuario.nroCelular }}</td>
                             <td>{{ usuario.datosusuario.fechaIngreso }}</td>
@@ -138,8 +138,8 @@
                     <div class="row form-group justify-content-around mb-3">
                         <div class="col-5">
                             <label>Rol de usuario :</label>
-                            <select class="form-select" name="tipoUsuario">
-                                <option value="USUARIO">Vendedor</option>
+                            <select class="form-select" name="rolUsuario">
+                                <option value="VENDEDOR">Vendedor</option>
                                 <option value="ADMINISTRADOR">Administrador</option>
                             </select>
                         </div>
